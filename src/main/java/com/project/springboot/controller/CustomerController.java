@@ -1,12 +1,11 @@
 package com.project.springboot.controller;
 
+import com.project.springboot.dto.Request.ReqCustomer;
 import com.project.springboot.dto.Response.RespCustomer;
 import com.project.springboot.dto.Response.Response;
 import com.project.springboot.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +21,13 @@ public class CustomerController {
         return customerService.getCustomerList();
     }
 
+    @GetMapping("/getCustomerById/{customerId}")
+    public Response<RespCustomer> getCustomerById(@PathVariable Long customerId) {
+        return customerService.getCustomerById(customerId);
+    }
+
+    @PostMapping("/addCustomer")
+    public Response addCustomer(@RequestBody ReqCustomer reqCustomer){
+        return customerService.addCustomer(reqCustomer);
+    }
 }

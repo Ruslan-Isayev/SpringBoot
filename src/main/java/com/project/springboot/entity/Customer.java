@@ -1,6 +1,9 @@
 package com.project.springboot.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
@@ -13,8 +16,10 @@ import java.util.Date;
 @Table(name = "customer")
 @Data
 @DynamicInsert
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +32,4 @@ public class Customer {
     private Date dataDate;
     @ColumnDefault("1")
     private Integer active;
-
-
 }
