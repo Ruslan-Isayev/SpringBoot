@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,20 +25,11 @@ public class CustomerServiceImpl implements CustomerService {
     public Response<List<RespCustomer>> getCustomerList() {
         Response<List<RespCustomer>> response = new Response<>();
         try {
-            List<RespCustomer> respCustomerList = new ArrayList<>();
             List<Customer> customerList = customerRepository.findAllByActive(EnumAvailableStatus.ACTIVE.value);
             if (customerList.isEmpty()) {
                 throw new MyException(ExceptionConstants.CUSTOMER_NOT_FOUND, "Customer not found");
             }
-            for (Customer customer : customerList) {
-                RespCustomer respCustomer = new RespCustomer();
-                respCustomer.setCustomerId(customer.getId());
-                respCustomer.setName(customer.getName());
-                respCustomer.setSurname(customer.getSurname());
-                respCustomer.setDob(customer.getDob());
-                respCustomer.setPhone(customer.getPhone());
-                respCustomerList.add(respCustomer);
-            }
+            List<RespCustomer> respCustomerList = customerList.stream().map(customer -> mapping(customer)).collect(Collectors.toList());
             response.setT(respCustomerList);
             response.setStatus(RespStatus.getSuccessMessage());
         } catch (MyException ex) {
@@ -49,5 +41,16 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return response;
+    }
+
+    private RespCustomer mapping(Customer customer) {
+        RespCustomer respCustomer = RespCustomer.builder()
+                .customerId(customer.getId())
+                .name(customer.getName())
+                .surname(customer.getSurname())
+                .dob(customer.getDob())
+                .phone(customer.getPhone())
+                .build();
+        return respCustomer;
     }
 }
