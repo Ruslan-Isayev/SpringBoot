@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class ReqCustomer {
+    private Long customerId;
     private String name;
     private String surname;
     private Date dob;

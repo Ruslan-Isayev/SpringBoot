@@ -13,4 +13,8 @@ public interface CustomerService {
     Response<RespCustomer> getCustomerById(Long customerId);
 
     Response addCustomer(ReqCustomer reqCustomer);
+
+    Response updateCustomer(ReqCustomer reqCustomer);
+
+    Response deleteCustomer(Long customerId);
 }

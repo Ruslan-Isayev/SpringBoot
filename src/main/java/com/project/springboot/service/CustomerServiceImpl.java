@@ -93,6 +93,60 @@ public class CustomerServiceImpl implements CustomerService {
         return response;
     }
 
+    @Override
+    public Response updateCustomer(ReqCustomer reqCustomer) {
+        Response response = new Response();
+        try {
+            String name = reqCustomer.getName();
+            String surname = reqCustomer.getSurname();
+            Long customerId = reqCustomer.getCustomerId();
+            if (name == null || surname == null || customerId == null) {
+                throw new MyException(ExceptionConstants.INVALID_REQUEST_DATA, "Invalid request data");
+            }
+            Customer customer = customerRepository.findCustomerByIdAndActive(customerId, EnumAvailableStatus.ACTIVE.value);
+            if (customer == null) {
+                throw new MyException(ExceptionConstants.CUSTOMER_NOT_FOUND, "Customer not found");
+            }
+            customer.setName(name);
+            customer.setSurname(surname);
+            customer.setDob(reqCustomer.getDob());
+            customer.setPhone(reqCustomer.getPhone());
+            customerRepository.save(customer);
+            response.setStatus(RespStatus.getSuccessMessage());
+        } catch (MyException ex) {
+            response.setStatus(new RespStatus(ex.getCode(), ex.getMessage()));
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            response.setStatus(new RespStatus(ExceptionConstants.INTERNAL_EXCEPTION, "Internal exception"));
+            ex.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public Response deleteCustomer(Long customerId) {
+        Response response = new Response();
+        try {
+            if (customerId == null) {
+                throw new MyException(ExceptionConstants.INVALID_REQUEST_DATA, "Invalid request data");
+            }
+            Customer customer = customerRepository.findCustomerByIdAndActive(customerId, EnumAvailableStatus.ACTIVE.value);
+            if (customer == null) {
+                throw new MyException(ExceptionConstants.CUSTOMER_NOT_FOUND, "Customer not found");
+            }
+            customer.setActive(EnumAvailableStatus.DEACTIVE.value);
+            customerRepository.save(customer);
+            response.setStatus(RespStatus.getSuccessMessage());
+        } catch (MyException ex) {
+            response.setStatus(new RespStatus(ex.getCode(), ex.getMessage()));
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            response.setStatus(new RespStatus(ExceptionConstants.INTERNAL_EXCEPTION, "Internal exception"));
+            ex.printStackTrace();
+        }
+        return response;
+    }
+
     private RespCustomer mapping(Customer customer) {
         RespCustomer respCustomer = RespCustomer.builder()
                 .customerId(customer.getId())
