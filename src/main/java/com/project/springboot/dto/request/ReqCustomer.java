@@ -1,13 +1,11 @@
-package com.project.springboot.dto.Response;
+package com.project.springboot.dto.request;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-@Builder
-public class RespCustomer {
+public class ReqCustomer {
     private Long customerId;
     private String name;
     private String surname;

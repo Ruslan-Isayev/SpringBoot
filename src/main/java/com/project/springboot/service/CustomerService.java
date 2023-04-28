@@ -1,8 +1,8 @@
 package com.project.springboot.service;
 
-import com.project.springboot.dto.Request.ReqCustomer;
-import com.project.springboot.dto.Response.RespCustomer;
-import com.project.springboot.dto.Response.Response;
+import com.project.springboot.dto.request.ReqCustomer;
+import com.project.springboot.dto.response.RespCustomer;
+import com.project.springboot.dto.response.Response;
 
 import java.util.List;
 

@@ -1,14 +1,15 @@
-package com.project.springboot.service;
+package com.project.springboot.service.impl;
 
-import com.project.springboot.dto.Request.ReqCustomer;
-import com.project.springboot.dto.Response.RespCustomer;
-import com.project.springboot.dto.Response.RespStatus;
-import com.project.springboot.dto.Response.Response;
+import com.project.springboot.dto.request.ReqCustomer;
+import com.project.springboot.dto.response.RespCustomer;
+import com.project.springboot.dto.response.RespStatus;
+import com.project.springboot.dto.response.Response;
 import com.project.springboot.entity.Customer;
 import com.project.springboot.enums.EnumAvailableStatus;
 import com.project.springboot.exception.ExceptionConstants;
 import com.project.springboot.exception.MyException;
 import com.project.springboot.repository.CustomerRepository;
+import com.project.springboot.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
