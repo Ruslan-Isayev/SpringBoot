@@ -27,7 +27,7 @@ public class Transaction {
     @JoinColumn(name = "customer_id")
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "dt_account_id")
     private Account dtAccount;
     private String crAccount;
     private Double amount;
