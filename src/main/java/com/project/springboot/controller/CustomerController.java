@@ -30,10 +30,12 @@ public class CustomerController {
     public Response addCustomer(@RequestBody ReqCustomer reqCustomer){
         return customerService.addCustomer(reqCustomer);
     }
+
     @PutMapping("/updateCustomer")
     public Response updateCustomer(@RequestBody ReqCustomer reqCustomer){
         return customerService.updateCustomer(reqCustomer);
     }
+
     @PutMapping("/deleteCustomer/{customerId}")
     public Response deleteCustomer(@PathVariable Long customerId){
         return customerService.deleteCustomer(customerId);

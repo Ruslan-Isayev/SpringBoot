@@ -11,4 +11,6 @@ public interface AccountService {
     Response<List<RespAccount>> getAccountListByCustomerId(Long customerId);
 
     Response createAccount(ReqAccount reqAccount);
+
+    Response deleteAccount(Long accountId);
 }
