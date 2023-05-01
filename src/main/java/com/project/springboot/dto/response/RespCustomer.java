@@ -13,4 +13,5 @@ public class RespCustomer {
     private String surname;
     private Date dob;
     private String phone;
+    private String cif;
 }

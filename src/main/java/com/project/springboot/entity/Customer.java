@@ -29,6 +29,7 @@ public class Customer {
     private String surname;
     private Date dob;
     private String phone;
+    private String cif;
     @CreationTimestamp
     private Date dataDate;
     @ColumnDefault("1")

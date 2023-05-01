@@ -11,4 +11,5 @@ public class ReqCustomer {
     private String surname;
     private Date dob;
     private String phone;
+    private String cif;
 }

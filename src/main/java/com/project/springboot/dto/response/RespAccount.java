@@ -12,4 +12,5 @@ public class RespAccount {
     private String iban;
     private String currency;
     private String branchCode;
+    private RespCustomer respCustomer;
 }
