@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 public class MyException extends RuntimeException{
 
     private Integer code;
+
     public MyException(Integer code, String message)  {
         super(message);
     }
@@ -13,5 +14,4 @@ public class MyException extends RuntimeException{
     public Integer getCode() {
         return code;
     }
-
 }
