@@ -8,4 +8,5 @@ public final class ExceptionConstants {
     public final static Integer TRANSACTION_NOT_FOUND = 104;
     public static final Integer DEBIT_ACCOUNT_NOT_FOUND = 105;
     public static final Integer INVALID_AMOUNT = 106;
+    public static final Integer USER_NOT_FOUND = 107;
 }

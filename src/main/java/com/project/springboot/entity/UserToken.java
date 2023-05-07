@@ -28,7 +28,7 @@ public class UserToken {
     private User user;
     private String token;
     @CreationTimestamp
-    private Date trDate;
+    private Date dataDate;
     @ColumnDefault("1")
     private Integer active;
 }
