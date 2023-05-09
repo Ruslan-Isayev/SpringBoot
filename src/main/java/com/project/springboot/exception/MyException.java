@@ -3,11 +3,11 @@ package com.project.springboot.exception;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class MyException extends RuntimeException{
+public class MyException extends RuntimeException {
 
     private Integer code;
 
-    public MyException(Integer code, String message)  {
+    public MyException(Integer code, String message) {
         super(message);
     }
 
