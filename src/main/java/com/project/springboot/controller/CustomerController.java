@@ -1,6 +1,7 @@
 package com.project.springboot.controller;
 
 import com.project.springboot.dto.request.ReqCustomer;
+import com.project.springboot.dto.request.ReqToken;
 import com.project.springboot.dto.response.RespCustomer;
 import com.project.springboot.dto.response.Response;
 import com.project.springboot.service.CustomerService;
@@ -16,14 +17,15 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
-    @GetMapping("/getCustomerList")
-    public Response<List<RespCustomer>> getCustomerList() {
-        return customerService.getCustomerList();
+
+    @PostMapping("/getCustomerList")
+    public Response<List<RespCustomer>> getCustomerList(@RequestBody ReqToken reqToken) {
+        return customerService.getCustomerList(reqToken);
     }
 
-    @GetMapping("/getCustomerById/{customerId}")
-    public Response<RespCustomer> getCustomerById(@PathVariable Long customerId) {
-        return customerService.getCustomerById(customerId);
+    @PostMapping("/getCustomerById")
+    public Response<RespCustomer> getCustomerById(@RequestBody ReqCustomer reqCustomer) {
+        return customerService.getCustomerById(reqCustomer);
     }
 
     @PostMapping("/addCustomer")
@@ -36,8 +38,8 @@ public class CustomerController {
         return customerService.updateCustomer(reqCustomer);
     }
 
-    @PutMapping("/deleteCustomer/{customerId}")
-    public Response deleteCustomer(@PathVariable Long customerId){
-        return customerService.deleteCustomer(customerId);
+    @PutMapping("/deleteCustomer")
+    public Response deleteCustomer(@RequestBody ReqCustomer reqCustomer){
+        return customerService.deleteCustomer(reqCustomer);
     }
 }

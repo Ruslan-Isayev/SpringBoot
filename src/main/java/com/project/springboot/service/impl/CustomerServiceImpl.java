@@ -1,15 +1,21 @@
 package com.project.springboot.service.impl;
 
 import com.project.springboot.dto.request.ReqCustomer;
+import com.project.springboot.dto.request.ReqToken;
 import com.project.springboot.dto.response.RespCustomer;
 import com.project.springboot.dto.response.RespStatus;
 import com.project.springboot.dto.response.Response;
 import com.project.springboot.entity.Customer;
+import com.project.springboot.entity.User;
+import com.project.springboot.entity.UserToken;
 import com.project.springboot.enums.EnumAvailableStatus;
 import com.project.springboot.exception.ExceptionConstants;
 import com.project.springboot.exception.MyException;
 import com.project.springboot.repository.CustomerRepository;
+import com.project.springboot.repository.UserRepository;
+import com.project.springboot.repository.UserTokenRepository;
 import com.project.springboot.service.CustomerService;
+import com.project.springboot.util.Utility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -21,10 +27,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
+    private final Utility utility;
+
     @Override
-    public Response<List<RespCustomer>> getCustomerList() {
+    public Response<List<RespCustomer>> getCustomerList(ReqToken reqToken) {
         Response<List<RespCustomer>> response = new Response<>();
         try {
+            utility.checkToken(reqToken);
             List<Customer> customerList = customerRepository.findAllByActive(EnumAvailableStatus.ACTIVE.value);
             if (customerList.isEmpty()) {
                 throw new MyException(ExceptionConstants.CUSTOMER_NOT_FOUND, "Customer not found");
@@ -43,9 +52,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Response<RespCustomer> getCustomerById(Long customerId) {
+    public Response<RespCustomer> getCustomerById(ReqCustomer reqCustomer) {
         Response<RespCustomer> response = new Response<>();
         try {
+            Long customerId = reqCustomer.getCustomerId();
+            utility.checkToken(reqCustomer.getReqToken());
             if (customerId == null) {
                 throw new MyException(ExceptionConstants.INVALID_REQUEST_DATA, "Invalid request data");
             }
@@ -68,8 +79,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Response addCustomer(ReqCustomer reqCustomer) {
-        Response response = new Response<>();
+        Response response = new Response();
         try {
+            utility.checkToken(reqCustomer.getReqToken());
             String name = reqCustomer.getName();
             String surname = reqCustomer.getSurname();
             if (name == null || surname == null) {
@@ -100,6 +112,7 @@ public class CustomerServiceImpl implements CustomerService {
             String name = reqCustomer.getName();
             String surname = reqCustomer.getSurname();
             Long customerId = reqCustomer.getCustomerId();
+            utility.checkToken(reqCustomer.getReqToken());
             if (name == null || surname == null || customerId == null) {
                 throw new MyException(ExceptionConstants.INVALID_REQUEST_DATA, "Invalid request data");
             }
@@ -124,9 +137,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Response deleteCustomer(Long customerId) {
+    public Response deleteCustomer(ReqCustomer reqCustomer) {
         Response response = new Response();
         try {
+            Long customerId = reqCustomer.getCustomerId();
+            utility.checkToken(reqCustomer.getReqToken());
             if (customerId == null) {
                 throw new MyException(ExceptionConstants.INVALID_REQUEST_DATA, "Invalid request data");
             }

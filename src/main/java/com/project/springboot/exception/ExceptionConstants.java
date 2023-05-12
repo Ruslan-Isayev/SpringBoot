@@ -9,4 +9,5 @@ public final class ExceptionConstants {
     public static final Integer DEBIT_ACCOUNT_NOT_FOUND = 105;
     public static final Integer INVALID_AMOUNT = 106;
     public static final Integer USER_NOT_FOUND = 107;
+    public static final Integer INVALID_TOKEN = 108;
 }
