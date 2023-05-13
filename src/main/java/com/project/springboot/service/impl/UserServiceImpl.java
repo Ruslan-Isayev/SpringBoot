@@ -80,6 +80,6 @@ public class UserServiceImpl implements UserService {
             response.setStatus(new RespStatus(ExceptionConstants.INTERNAL_EXCEPTION, "Internal exception"));
             ex.printStackTrace();
         }
-        return null;
+        return response;
     }
 }
