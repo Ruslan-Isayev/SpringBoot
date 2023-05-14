@@ -6,18 +6,15 @@ import com.project.springboot.dto.response.RespCustomer;
 import com.project.springboot.dto.response.RespStatus;
 import com.project.springboot.dto.response.Response;
 import com.project.springboot.entity.Customer;
-import com.project.springboot.entity.User;
-import com.project.springboot.entity.UserToken;
 import com.project.springboot.enums.EnumAvailableStatus;
 import com.project.springboot.exception.ExceptionConstants;
 import com.project.springboot.exception.MyException;
 import com.project.springboot.repository.CustomerRepository;
-import com.project.springboot.repository.UserRepository;
-import com.project.springboot.repository.UserTokenRepository;
 import com.project.springboot.service.CustomerService;
 import com.project.springboot.util.Utility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
