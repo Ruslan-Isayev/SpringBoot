@@ -2,6 +2,7 @@ package com.project.springboot.service.impl;
 
 import com.project.springboot.dto.request.ReqAccount;
 import com.project.springboot.dto.response.RespAccount;
+import com.project.springboot.dto.response.RespCustomer;
 import com.project.springboot.dto.response.RespStatus;
 import com.project.springboot.dto.response.Response;
 import com.project.springboot.entity.Account;
@@ -114,14 +115,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private RespAccount mapping(Account account) {
-        RespAccount respAccount = RespAccount.builder().
-                id(account.getId()).
-                name(account.getName()).
-                accountNo(account.getAccountNo()).
-                iban(account.getIban()).
-                currency(account.getCurrency()).
-                branchCode(account.getBranchCode()).
-                build();
+        RespCustomer respCustomer = RespCustomer.builder()
+                .name(account.getCustomer().getName())
+                .surname(account.getCustomer().getSurname())
+                .build();
+
+        RespAccount respAccount = RespAccount.builder()
+                .id(account.getId())
+                .name(account.getName())
+                .accountNo(account.getAccountNo())
+                .iban(account.getIban())
+                .currency(account.getCurrency())
+                .branchCode(account.getBranchCode())
+                .customer(respCustomer)
+                .build();
         return respAccount;
     }
 }

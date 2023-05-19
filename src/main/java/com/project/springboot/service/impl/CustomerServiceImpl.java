@@ -166,6 +166,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .surname(customer.getSurname())
                 .dob(customer.getDob())
                 .phone(customer.getPhone())
+                .cif(customer.getCif())
                 .build();
         return respCustomer;
     }

@@ -105,7 +105,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .iban(transaction.getDtAccount().getIban())
                 .currency(transaction.getDtAccount().getCurrency())
                 .branchCode(transaction.getDtAccount().getBranchCode())
-                .respCustomer(respCustomer)
+                .customer(respCustomer)
                 .build();
 
         RespTransaction respTransaction = RespTransaction.builder()
